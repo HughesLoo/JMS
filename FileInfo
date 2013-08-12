@@ -1,0 +1,62 @@
+package com.loo.typequeue;
+
+public class FileInfo {
+  
+	public FileInfo(String filePath, String fileType)
+	{
+		this.filePath = filePath;
+		this.fileType = fileType;
+		this.fullInfo = filePath + "@" + fileType;
+	}
+	
+	public FileInfo(String fullInfo)
+	{
+		if (!fullInfo.isEmpty())
+		{
+			int location = fullInfo.lastIndexOf("@");
+			if (location != -1)
+			{
+				filePath = fullInfo.substring(0, location);
+				fileType = fullInfo.substring(location + 1);
+				this.fullInfo = fullInfo;
+			}
+			else
+			{
+				filePath = null;
+				fileType = null;
+				fullInfo = null;
+			}
+		}
+	}
+	
+	public String getFileName()
+	{
+		int startIndex = filePath.lastIndexOf("\\");
+		int endIndex = filePath.lastIndexOf(".");
+		return filePath.substring(startIndex + 1, endIndex);
+	}
+	
+	public String getFilePath()
+	{
+		return filePath;
+	}
+	
+	public String getFileType()
+	{
+		return fileType;
+	}
+
+	public String getFullInfo()
+	{
+		return fullInfo;
+	}
+	
+	public boolean isEmpty()
+	{
+		return filePath != null ? (fileType != null ? false : true) : true;
+	}	
+	
+	private String filePath;
+	private String fileType;
+	private String fullInfo;
+}
